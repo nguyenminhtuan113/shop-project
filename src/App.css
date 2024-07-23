@@ -1,0 +1,16 @@
+.custom-slider .slick-dots {
+     bottom: 6px !important;
+  }
+  
+.custom-slider .slick-dots li button:before {
+    font-size: 15px; /* Kích thước của dot */
+
+  }
+  
+.custom-slider .slick-next{
+    display: none !important;
+  }
+  .custom-slider .slick-prev{
+    display: none !important;
+  }
+  
