@@ -30,6 +30,8 @@ import axios from 'axios';
 import ApiServices from '../../services/ApiService';
 import { listCategory } from '../../redux-tookit/feater/categorySlice';
 import AccountMenu from '../menuAccount/MenuAccount';
+import { updateStateOpenLogin } from '../../redux-tookit/feater/authenSlice';
+import { ListCarts } from '../listCart/ListCart';
 const drawerWidth = 400;
 
 const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
@@ -88,6 +90,7 @@ export default function Header() {
     // const { listCate } = useSelector((state) => state.categorySlice);
     const dispatch = useDispatch();
     const { isOpenLogin, username } = useSelector((state) => state.authenSlice);
+    const { carts } = useSelector((state) => state.cartsSlice);
     const fetchDataCategory = async () => {
         const res = await ApiServices.getApiCategory();
         // console.log(res, 'res');
@@ -100,13 +103,17 @@ export default function Header() {
     const [open, setOpen] = React.useState(false);
 
     const handleDrawerOpen = () => {
-        setOpen(true);
+        if (username) {
+            setOpen(true);
+
+        } else {
+            dispatch(updateStateOpenLogin(true));
+        }
     };
 
     const handleDrawerClose = () => {
         setOpen(false);
     };
-
     return (
         <header>
             <Box sx={{ display: 'flex', }} >
@@ -149,6 +156,7 @@ export default function Header() {
                                     <input type="search" id="default-search" className="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search product ..." />
                                     <button type="submit" className="text-white absolute end-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Search</button>
                                 </div>
+                                
                                 <NavCategory />
                             </div>
 
@@ -159,8 +167,14 @@ export default function Header() {
                                     edge="end"
                                     onClick={handleDrawerOpen}
                                     sx={{ ...(open && { display: 'none' }) }}
+                                    className='relative'
                                 >
                                     <ShoppingCartIcon fontSize='large' />
+                                    {
+                                        username && <div className='absolute top-0 right-0 bg-white
+                                         text-black px-2 py-[2px] text-sm rounded-[50%]'>{carts.length}</div>
+
+                                    }
                                 </IconButton>
                             </div>
                         </Toolbar>
@@ -190,7 +204,7 @@ export default function Header() {
                         </IconButton>
                     </DrawerHeader>
                     <Divider />
-                    content
+                    <ListCarts />
                 </Drawer>
             </Box>
         </header>

@@ -45,8 +45,20 @@ const authenSlice = createSlice({
                 ...state,
                 isOpenLogin: action.payload,
             }
+        },
+        doLogout: (state) => {
+            toast.success("Logout thành công!", {
+                duration: 1000,
+                position: "top-center",
+            });
+            localStorage.removeItem('username');
+            return {
+                ...state,
+                username: ''
+            }
+
         }
     }
 })
-export const { doLogin, updateStateOpenLogin } = authenSlice.actions;
+export const { doLogin, updateStateOpenLogin, doLogout } = authenSlice.actions;
 export default authenSlice.reducer;

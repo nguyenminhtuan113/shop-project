@@ -4,17 +4,15 @@ import Avatar from '@mui/material/Avatar';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
-import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
 import Tooltip from '@mui/material/Tooltip';
-import PersonAdd from '@mui/icons-material/PersonAdd';
-import Settings from '@mui/icons-material/Settings';
 import Logout from '@mui/icons-material/Logout';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { doLogout } from '../../redux-tookit/feater/authenSlice';
 
 export default function AccountMenu() {
     const [anchorEl, setAnchorEl] = React.useState(null);
+    const dispatch = useDispatch();
     const { username } = useSelector((state) => state.authenSlice);
     const open = Boolean(anchorEl);
     const handleClick = (event) => {
@@ -78,10 +76,13 @@ export default function AccountMenu() {
                     <Avatar /> Profile
                 </MenuItem>
                 <MenuItem onClick={handleClose}>
-                    <ListItemIcon>
-                        <Logout fontSize="small" />
-                    </ListItemIcon>
-                    Logout
+                    <div onClick={() => dispatch(doLogout())} >
+                        <ListItemIcon>
+                            <Logout fontSize="small" />
+                        </ListItemIcon>
+                        Logout
+                    </div>
+
                 </MenuItem>
             </Menu>
         </React.Fragment>
