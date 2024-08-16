@@ -5,8 +5,8 @@ import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 export const NavigateCategory = () => {
     const { id } = useParams();
     return (
-        <div>
-            <h1 className='flex items-center p-3 bg-slate-200 mt-3 gap-1'>
+        <div className='bg-white mt-6'>
+            <h1 className='flex items-center p-3 bg-slate-200  gap-1'>
                 <Link to={'/'}>
                     <div className='flex items-center hover:underline'>
                         <HomeIcon />

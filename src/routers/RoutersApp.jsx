@@ -13,8 +13,8 @@ export const RoutersApp = () => {
                 <Route path='' element={<HomePage />} />
                 <Route path='product/:id' element={<ProductSinglePage />} />
                 <Route path='category/:id' element={<CategoryPage />} />
-
                 <Route path='cart' element={<CartPage />} />
+                
             </Route>
         </Routes>
     )

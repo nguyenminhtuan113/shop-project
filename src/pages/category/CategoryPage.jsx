@@ -13,26 +13,26 @@ export const CategoryPage = () => {
     const fetchData = async () => {
         setLoading(true)
         const res = await ApiServices.getApiProductByCategory(id);
-        const { producs } = res;
-        setListCategories(producs);
+        const { products } = res;
+        setListCategories(products);
         setLoading(false);
     }
     useEffect(() => {
         if (id) {
             fetchData();
         }
-        window.scrollTo({ top: 200, behavior: "smooth" })
+        window.scrollTo({ top: 0, behavior: "smooth" })
     }, [id])
     const handleCategoryClick = (categoryId) => {
 
         navigate(`/category/${categoryId}`)
     }
     return (
-        <div className='max-w-[1200px] max-auto'>
+        <div className='max-w-[1200px] mx-auto mt-3'>
             <NavigateCategory />
             <div className='flex gap-6 bg-white p-3'>
-                <div className='w-1/4 rounded-md'>
-                    <h1 className='uppercase py-3 font-bold'>Danh mục</h1>
+                <div className='w-1/4 rounded-md mt-3'>
+                    <h1 className='uppercase font-bold'>Danh mục</h1>
                     <ListCategory handleClick={(category) => {
                         handleCategoryClick(category)
                     }} />

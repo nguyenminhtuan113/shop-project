@@ -8,7 +8,7 @@ export const NavCategory = () => {
     // console.log(listCate, "listCate")
     return (
         <ul className='flex gap-5 p-2'>
-            {listCate.slice(0, 5).map((cate, index) => (<li key={index} className='hover:text-gray-300 text-sm'><Link>{cate.name}</Link></li>))}
+            {listCate.slice(0, 5).map((cate, index) => (<li key={index} className='hover:text-gray-300 text-sm'><Link to={`category/${cate.slug}`} className='hover:underline'>{cate.name}</Link></li>))}
 
         </ul>
     )

@@ -11,7 +11,7 @@ export const PaginationHome = ({ dataPagination, getSkip }) => {
                     variant='outlined'
                     shape='rounded'
                     color='primary'
-                    onChange={(e, page) => {
+                    onChange={(e,page) => {
                         getSkip(page - 1)
                     }}
 

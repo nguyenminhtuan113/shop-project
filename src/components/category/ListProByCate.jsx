@@ -18,12 +18,11 @@ export const ListProByCate = ({ listCategories, isLoading }) => {
                         <h1 className='uppercase p-2 font-bold w-full'>{id}</h1>
                         <ul className='flex flex-wrap gap-3 justify-between mt-3'>
                             {listCategories.map((product) => (
-                                <Link to={`/product/${product.id}`}>
+                                <Link to={`/product/${product.id}`} key={product.id}>
                                     <li className='bg-white w-[220px] cursor-pointer border relative hover:scale-[1.02] 
                                     ease-in duration-200 hover:border-red-600 rounded-2xl py-3'>
                                         <img src={product.thumbnail} alt={product.title} className='w-full border-b-2 rounded-2xl' />
-                                    </li>
-                                    <span className='absolute top-2 left-0'>
+                                        <span className='absolute top-2 left-0'>
                                         <img
                                             src="https://down-vn.img.susercontent.com/file/76c36bd87ff2eb5887d9ad3516111869"
                                             alt=""
@@ -49,6 +48,8 @@ export const ListProByCate = ({ listCategories, isLoading }) => {
                                             <p>Đã bán: {product.stock}</p>
                                         </div>
                                     </div>
+                                    </li>
+                                    
                                 </Link>
                             ))
 

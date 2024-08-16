@@ -4,6 +4,7 @@ import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import { addToCart, reduceFromCart, removeFromCart } from "../../redux-tookit/feater/cartsSlice";
+import { Link } from "react-router-dom";
 export const ListCarts = () => {
     const dispath = useDispatch();
     const { carts } = useSelector((state) => state.cartsSlice);
@@ -17,45 +18,47 @@ export const ListCarts = () => {
             ) : (
                 <div className="p-3">
                     {carts.map((item) => (
-                        <div className="mt-6 space-y-2" key={item.id}>
-                            <div className="flex p-2 rounded-lg  gap-3 border items-center">
-                                <img
-                                    src={item.thumbnail}
-                                    alt="thumbnail"
-                                    className="h-14 w-14"
-                                />
-                                <div className="w-4/6">
-                                    <h3 className="font-bold leading-4 text-lg">{item.title}</h3>
-                                    <div className="flex space-x-2 py-1 items-center">
-                                        <h3 className="font-semibold">
-                                            ${item.price} x sl:{item.quantity}
-                                        </h3>
-                                        <span className="text-xs">-{item.discountPercentage}%</span>
-                                    </div>
-                                    <div className="flex items-center space-x-1">
-                                        <RemoveCircleOutlineIcon
-                                            onClick={() => dispath(reduceFromCart(item.id))}
-                                            className="cursor-pointer"
-                                        />
-                                        <span className="font-semibold">{item.quantity}</span>
-                                        <AddCircleOutlineIcon
-                                            className="cursor-pointer"
-                                            onClick={() => dispath(addToCart(item))}
-                                        />
-                                    </div>
-                                </div>
-                                <div className="font-bold grow">
-                                    <span data-test="cart-item-price">
-                                        ${item.quantity * item.price}
-                                    </span>
-                                    <DeleteForeverIcon
-                                        onClick={() => dispath(removeFromCart(item.id))}
-                                        className="text-xl cursor-pointer text-red-600"
+                        
+                            <div className="mt-6 space-y-2" key={item.id}>
+                                <div className="flex p-2 rounded-lg  gap-3 border items-center">
+                                    <img
+                                        src={item.thumbnail}
+                                        alt="thumbnail"
+                                        className="h-14 w-14"
                                     />
+                                    <div className="w-4/6">
+                                        <h3 className="font-bold leading-4 text-lg">{item.title}</h3>
+                                        <div className="flex space-x-2 py-1 items-center">
+                                            <h3 className="font-semibold">
+                                                ${item.price} x sl:{item.quantity}
+                                            </h3>
+                                            <span className="text-xs">-{item.discountPercentage}%</span>
+                                        </div>
+                                        <div className="flex items-center space-x-1">
+                                            <RemoveCircleOutlineIcon
+                                                onClick={() => dispath(reduceFromCart(item.id))}
+                                                className="cursor-pointer"
+                                            />
+                                            <span className="font-semibold">{item.quantity}</span>
+                                            <AddCircleOutlineIcon
+                                                className="cursor-pointer"
+                                                onClick={() => dispath(addToCart(item))}
+                                            />
+                                        </div>
+                                    </div>
+                                    <div className="font-bold grow">
+                                        <span data-test="cart-item-price">
+                                            ${item.quantity * item.price}
+                                        </span>
+                                        <DeleteForeverIcon
+                                            onClick={() => dispath(removeFromCart(item.id))}
+                                            className="text-xl cursor-pointer text-red-600"
+                                        />
+                                    </div>
                                 </div>
                             </div>
-                        </div>
                     ))}
+                    {carts && carts.length > 0 ? <div className="mt-6"><Link to={`cart/`} className="bg-[#FB5630] p-2 float-right text-white rounded-lg">Xem giỏ hàng</Link></div> : ''}
                 </div>
             )}
         </>
